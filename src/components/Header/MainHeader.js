@@ -1,17 +1,23 @@
 import React from 'react'
 import Options from './Options'
 
-function MainHeader() {
+function MainHeader(props) {
     const cellFillOptions = [ 
-        {id:'Start', value: 's'}, 
-        {id:'End' , value:'e'}, 
-        {id:'Wall' , value:'w'},
-        {id:'Clear' , value:'c'}
+        {id:'Start', value: 'S'}, 
+        {id:'End' , value:'E'}, 
+        {id:'Wall' , value:'W'},
+        {id:'Clear' , value:' '}
     ];
+
+    function onChange(event) {
+      props.onChange(event)
+    }
 
   return (
     <header>
-        <Options name='cellFillOptions' options={cellFillOptions} />
+        <Options name='cellFillOptions' options={cellFillOptions} onChange={onChange}/>
+        <button>Reset</button>
+        <button>Find Path</button>
     </header>
   )
 }
