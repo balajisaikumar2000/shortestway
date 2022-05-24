@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import MainHeader from './Header/MainHeader'
+import ErrorModal from './UI/Backdrop'
 import './Grid.css'
 
 function Gridlayout(props) {
@@ -76,15 +77,20 @@ function Grid(props) {
 }
 
 function Cell(props) {
-    const [cell, cellState] = useState(() => ' ');
+    const [cell, setCellState] = useState(() => ' ');
+    const [error,setError] = useState(() => false);
+    function onConfirm(){
+        setError(false);
+    }
     function handleClick(event) {
         let invalidState = false;
-        cellState((prev) => {
+        setCellState((prev) => {
             if (props.selectedOption === prev) {
                 return ' ';
             } else if ((props.selectedOption === 'S' && props.start) || (props.selectedOption === 'E' && props.end)) {
                 invalidState = true;
-                alert('You can choose only one cell as Start or End');
+                setError((prev) => true);
+                // alert('You can choose only one cell as Start or End');
                 return prev;
             }
             return props.selectedOption;
@@ -92,7 +98,10 @@ function Cell(props) {
         if (!invalidState) props.onClick(event);
     }
     return (
-        <div className={`cell ${cell}`} onClick={handleClick} id={`${props.rowId}-${props.cellId}`} ><p>{`${props.rowId}-${props.cellId}`}</p></div>
+        <>
+            {error && <ErrorModal onConfirm={onConfirm} title="Error" message="You can choose only one cell as Start or End"/>}
+            <div className={`cell ${cell}`} onClick={handleClick} id={`${props.rowId}-${props.cellId}`} ><p>{`${props.rowId}-${props.cellId}`}</p></div>
+        </>
     )
 }
 
