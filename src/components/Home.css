@@ -26,6 +26,9 @@ form h2 {
 .gridBox {
   border: 1px solid black;
   border-radius: 4px;
+  background: rgb(9, 121, 110, 1);
+  color: white;
+
   padding: 3px;
 }
 .inputGrid {
