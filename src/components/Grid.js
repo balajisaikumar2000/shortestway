@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./Grid.css";
+import React, { useEffect, useState, useRef } from "react";
+// import "./Grid.css";
 
 function Grid(props) {
   const [grid, setGrid] = useState(
@@ -7,6 +7,11 @@ function Grid(props) {
       .fill("")
       .map(() => new Array(props.currentGrid).fill(" "))
   );
+  let cnt = useRef(0);
+  useEffect(() => {
+    cnt.current = cnt.current + 1;
+    console.log(cnt);
+  });
   // const grid = new Array(props.currentGrid)
   //   .fill("")
   //   .map(() => new Array(props.currentGrid).fill(" "));

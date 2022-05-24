@@ -1,33 +1,28 @@
 import "./App.css";
-import Grid from "./components/Grid";
-import MainHeader from "./components/Header/MainHeader";
-import GridSelector from "./components/GridSelector";
 import { useState } from "react";
+import Home from "./components/Home";
 
 function App() {
-  const [currentGrid, setCurrentGrid] = useState();
-  const [gridActive, setGridActive] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(" ");
-  function onChange(event) {
-    const val = event.target.value;
-    setSelectedOption((prev) => val);
-  }
-  function gridChange(event) {
-    setGridActive(true);
-    const val = event.target.value;
-    setCurrentGrid((prev) => Number(val));
+  const [gridState, setGridState] = useState({
+    gridActive: false,
+    value: null,
+  });
+
+  function gridSizeHandler(val) {
+    setGridState((prev) => {
+      return {
+        gridActive: true,
+        value: val,
+      };
+    });
   }
 
   return (
     <>
-      <GridSelector gridChange={gridChange} />
-      {gridActive ? (
-        <div>
-          <MainHeader onChange={onChange} />
-          <Grid selectedOption={selectedOption} currentGrid={currentGrid} />
-        </div>
+      {gridState.gridActive ? (
+        <h1>Hey i am grid </h1>
       ) : (
-        console.log("nothing here")
+        <Home getGridSize={gridSizeHandler} />
       )}
     </>
   );

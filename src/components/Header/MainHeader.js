@@ -1,6 +1,5 @@
 import React from "react";
 import Options from "./Options";
-
 function MainHeader(props) {
   const cellFillOptions = [
     { id: "Start", value: "S" },

@@ -1,66 +1,68 @@
-*{
-    padding: none;
-    margin: none;
-    background-color: black;
+* {
+  padding: none;
+  margin: none;
+  background-color: black;
 }
 
-#grid{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-#rows_parent{
-    flex-direction: column;
-    width: 90vw;
+#rows_parent {
+  flex-direction: column;
+  width: 90vw;
 }
 
-.row{
-    display: flex;
-    flex: 0.1;
+.row {
+  display: flex;
+  flex: 0.1;
 }
 
-.cell{
-    flex: 1;
-    cursor: pointer;
-    margin: 3px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 2px solid rgba(0, 255, 255, 0.329);
-    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1), border 0.2s ease-in-out, background-color 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+.cell {
+  flex: 1;
+  cursor: pointer;
+  margin: 3px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid rgba(0, 255, 255, 0.329);
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1),
+    border 0.2s ease-in-out,
+    background-color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.cell:hover{
-    transform: scale(1.2);
-    border: 2px solid rgba(0, 255, 255, 1);
-    background-color: cyan;
+.cell:hover {
+  transform: scale(1.2);
+  border: 2px solid rgba(0, 255, 255, 1);
+  background-color: cyan;
 }
 
-.cell p{
-    pointer-events: none;
-    font-size: 10px;
-    color: white;
-    background-color: transparent;
+.cell p {
+  pointer-events: none;
+  font-size: 10px;
+  color: white;
+  background-color: transparent;
 
-    transition: color 0.4s ease-in-out;
+  transition: color 0.4s ease-in-out;
 }
 
-.cell:hover p{
-    color: black;
+.cell:hover p {
+  color: black;
 }
 
-.W{
-    background-color:blue;
+.W {
+  background-color: blue;
 }
 
-.S{
-    background-color: lightgreen;
+.S {
+  background-color: lightgreen;
 }
 
-.E{
-    background-color: lightcoral;
+.E {
+  background-color: lightcoral;
 }
