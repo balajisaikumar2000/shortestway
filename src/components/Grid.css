@@ -1,10 +1,10 @@
 * {
   padding: none;
   margin: none;
-  background-color: black;
+  /* background-color: black; */
 }
 
-#grid {
+#main-grid {
   display: flex;
   flex-direction: column;
   justify-content: center;

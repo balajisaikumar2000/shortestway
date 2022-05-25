@@ -1,5 +1,7 @@
 import "./App.css";
 import { useState } from "react";
+import Gridlayout from "./components/Grid";
+
 import Home from "./components/Home";
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
   return (
     <>
       {gridState.gridActive ? (
-        <h1>Hey i am grid </h1>
+        <Gridlayout gridSize="32" />
       ) : (
         <Home getGridSize={gridSizeHandler} />
       )}
