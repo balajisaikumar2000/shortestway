@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       {gridState.gridActive ? (
-        <Gridlayout gridSize="32" />
+        <Gridlayout gridSize={gridState.value} />
       ) : (
         <Home getGridSize={gridSizeHandler} />
       )}
