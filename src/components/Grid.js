@@ -1,83 +1,103 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef } from "react";
+import MainHeader from "./Header/MainHeader";
+import ErrorModal from "./UI/Backdrop";
 import "./Grid.css";
 
-function Grid(props) {
-  const [grid, setGrid] = useState(
-    new Array(props.currentGrid)
-      .fill("")
-      .map(() => new Array(props.currentGrid).fill(" "))
+function Gridlayout(props) {
+  const [selectedOption, setSelectedOption] = useState(" ");
+  function onChange(event) {
+    const val = event.target.value;
+    setSelectedOption((prev) => val);
+  }
+  return (
+    <div id="main-grid">
+      <MainHeader onChange={onChange} />
+      <Grid gridSize={props.gridSize} selectedOption={selectedOption}></Grid>
+    </div>
   );
-  // const grid = new Array(props.currentGrid)
-  //   .fill("")
-  //   .map(() => new Array(props.currentGrid).fill(" "));
-  const [start, setStart] = useState(false);
-  const [end, setEnd] = useState(false);
+}
+
+function Grid(props) {
+  const grid = useRef(
+    new Array(Number(props.gridSize))
+      .fill("")
+      .map(() => new Array(Number(props.gridSize)).fill(" "))
+  );
+  const [start, setStart] = useState({
+    isExist: false,
+    rowId: null,
+    colId: null,
+  });
+  const [end, setEnd] = useState({ isExist: false, rowId: null, colId: null });
   function handleClick(event) {
     const cellId = event.target.id;
     const [rowId, colId] = cellId.split("-").map(Number);
-    if (props.selectedOption === "S") {
-      setStart((prev) => !prev);
-      if (start) {
-        setGrid((prev) => {
-          prev[rowId][colId] = "S";
-          return [...prev];
+    if (grid.current[rowId][colId] === props.selectedOption) {
+      if (grid.current[rowId][colId] === "S") {
+        setStart((prev) => {
+          return { isExist: false, rowId: null, colId: null };
         });
-      } else {
-        setGrid((prev) => {
-          prev[rowId][colId] = " ";
-          return [...prev];
+      } else if (grid.current[rowId][colId] === "E") {
+        setEnd((prev) => {
+          return { isExist: false, rowId: null, colId: null };
         });
       }
+      grid.current[rowId][colId] = " ";
+    } else if (props.selectedOption === "S") {
+      if (grid.current[rowId][colId] === "E") {
+        setEnd((prev) => {
+          return { isExist: false, rowId: null, colId: null };
+        });
+      }
+      setStart((prev) => {
+        return { isExist: true, rowId: rowId, colId: colId };
+      });
+      grid.current[rowId][colId] = "S";
     } else if (props.selectedOption === "E") {
-      setEnd((prev) => !prev);
-      if (end) {
-        setGrid((prev) => {
-          prev[rowId][colId] = "E";
-          return [...prev];
-        });
-      } else {
-        setGrid((prev) => {
-          prev[rowId][colId] = " ";
-          return [...prev];
+      if (grid.current[rowId][colId] === "S") {
+        setStart((prev) => {
+          return { isExist: false, rowId: null, colId: null };
         });
       }
+      setEnd((prev) => {
+        return { isExist: true, rowId: rowId, colId: colId };
+      });
+      grid.current[rowId][colId] = "E";
+    } else if (props.selectedOption === "W") {
+      if (grid.current[rowId][colId] === "S") {
+        setStart((prev) => {
+          return { isExist: false, rowId: null, colId: null };
+        });
+      } else if (grid.current[rowId][colId] === "E") {
+        setEnd((prev) => {
+          return { isExist: false, rowId: null, colId: null };
+        });
+      }
+      grid.current[rowId][colId] = "W";
     } else {
-      if (props.selectedOption === grid[rowId][colId]) {
-        setGrid((prev) => {
-          prev[rowId][colId] = " ";
-          return [...prev];
+      if (grid.current[rowId][colId] === "S") {
+        setStart((prev) => {
+          return { isExist: false, rowId: null, colId: null };
         });
-      } else {
-        setGrid((prev) => {
-          prev[rowId][colId] = props.selectedOption;
-          return [...prev];
+      } else if (grid.current[rowId][colId] === "E") {
+        setEnd((prev) => {
+          return { isExist: false, rowId: null, colId: null };
         });
       }
+      grid.current[rowId][colId] = " ";
     }
-    // setGrid((prevGrid) => {
-    //     prevGrid[rowId][colId] = props.selectedOption;
-    //     return [...prevGrid]
-    // })
   }
-  useEffect(() => {
-    setGrid(
-      new Array(props.currentGrid)
-        .fill("")
-        .map(() => new Array(props.currentGrid).fill(" "))
-    );
-  }, [props.currentGrid]);
-
   return (
     <div id="rows_parent">
-      {grid.map((row, rowId) => {
+      {grid.current.map((row, rowId) => {
         return (
           <div className="row" id={"row_" + rowId} key={rowId}>
             {row.map((cell, cellId) => {
               return (
                 <Cell
                   selectedOption={props.selectedOption}
-                  start={start}
-                  end={end}
+                  start={start["isExist"]}
+                  end={end["isExist"]}
                   rowId={rowId}
                   cellId={cellId}
                   key={cellId}
@@ -93,10 +113,14 @@ function Grid(props) {
 }
 
 function Cell(props) {
-  const [cell, cellState] = useState(() => props.selectedOption); // # passing arg as function makes it run only on first time
+  const [cell, setCellState] = useState(() => " ");
+  const [error, setError] = useState(() => false);
+  function onConfirm() {
+    setError(false);
+  }
   function handleClick(event) {
     let invalidState = false;
-    cellState((prev) => {
+    setCellState((prev) => {
       if (props.selectedOption === prev) {
         return " ";
       } else if (
@@ -104,22 +128,32 @@ function Cell(props) {
         (props.selectedOption === "E" && props.end)
       ) {
         invalidState = true;
-        alert("You can choose only cell as Start or End");
-        return " ";
+        setError((prev) => true);
+        // alert('You can choose only one cell as Start or End');
+        return prev;
       }
       return props.selectedOption;
     });
     if (!invalidState) props.onClick(event);
   }
   return (
-    <div
-      className={`cell ${cell}`}
-      onClick={handleClick}
-      id={`${props.rowId}-${props.cellId}`}
-    >
-      <p>{`${props.rowId}-${props.cellId}`}</p>
-    </div>
+    <>
+      {error && (
+        <ErrorModal
+          onConfirm={onConfirm}
+          title="Error"
+          message="You can choose only one cell as Start or End"
+        />
+      )}
+      <div
+        className={`cell ${cell}`}
+        onClick={handleClick}
+        id={`${props.rowId}-${props.cellId}`}
+      >
+        <p>{`${props.rowId}-${props.cellId}`}</p>
+      </div>
+    </>
   );
 }
 
-export default Grid;
+export default Gridlayout;
