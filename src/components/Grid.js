@@ -158,7 +158,7 @@ function Cell(props) {
 
   return (
     <>
-      {error && (<ErrorModal onConfirm={onConfirm} title="Error" message="You can choose only one cell as Start or End" />)} // pops Error msg when state is inavalid
+      {error && (<ErrorModal onConfirm={onConfirm} title="Error" message="You can choose only one cell as Start or End" />)} 
       <div className={`cell ${(props.path.has(props.rowId+"-"+props.cellId))?'Y':cell}`} onClick={updateCell} id={`${props.rowId}-${props.cellId}`}>
         <p>{`${props.rowId}-${props.cellId}`}</p>
       </div>
