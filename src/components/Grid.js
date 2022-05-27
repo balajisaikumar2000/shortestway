@@ -5,12 +5,15 @@ import getPath from "./BFS";
 import "./Grid.css";
 
 function Gridlayout(props) {
-  const [selectedOption, setSelectedOption] = useState(" ");
-  const [find, setFind] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(" "); // specifies the selected option ie. (start , end , wall , clear) passed as a prop to Grid component
+  const [find, setFind] = useState(false); // specifies whether to find path or not (true/false) passed as a prop to Grid component
+
+  // onChange function listens for changes in the selected option passed as a props to MainHeader component.
   function onChange(event) {
     const val = event.target.value;
     setSelectedOption((prev) => val);
   }
+  // val becomes true when search button is clicked (passed as a prop to MainHeader) and becomes false when grid is updated (passed as a prop to grid). 
   function setPathFind(val){
     setFind((prev) => val);
   }
@@ -24,10 +27,12 @@ function Gridlayout(props) {
 
 function Grid(props) {
   const grid = useRef(new Array(Number(props.gridSize)).fill(" ").map(() => new Array(Number(props.gridSize)).fill(" ")));
-  const [start, setStart] = useState({ isExist: false, rowId: null, colId: null });
-  const [end, setEnd] = useState({ isExist: false, rowId: null, colId: null });
-  const [path,setPath] = useState(new Set())
-  const [error,setError] = useState(false);
+  const [start, setStart] = useState({ isExist: false, rowId: null, colId: null }); // start point in the grid
+  const [end, setEnd] = useState({ isExist: false, rowId: null, colId: null }); // end point in the grid
+  const [path,setPath] = useState(new Set()); // shortest path between the start and end (if porps.find is true it get the path else it is a empty set). 
+  const [error,setError] = useState(false); // If there is no start or end point and search button is clicked then it becomes true and error is popped up.
+  
+  // if props.find == true call bfs and stores the output in the path else sets the path to empty set
   useEffect(()=>{
     if(props.find){
       if(!start.isExist || !end.isExist){
@@ -39,9 +44,13 @@ function Grid(props) {
       setPath((prev)=> new Set());
     }
   },[props.find]);
+
+  // Error Confirm
   function onConfirm() {
     setError(false);
   }
+
+  // grid updateLogic
   function updateGrid(event) {
     const cellId = event.target.id;
     const [rowId, colId] = cellId.split("-").map(Number);
@@ -125,27 +134,32 @@ function Grid(props) {
 function Cell(props) {
   const [cell, setCellState] = useState(() => " ");
   const [error, setError] = useState(() => false);
+
+  // Error confirm
   function onConfirm() {
     setError(false);
   }
-  function updateGrid(event) {
+
+  // updates the cell state and if it is a valid update then update is passed to grid by props.updateGrid
+  function updateCell(event) {
     let invalidState = false;
     setCellState((prev) => {
       if (props.selectedOption === prev) {
         return " ";
       } else if ((props.selectedOption === "S" && props.start) || (props.selectedOption === "E" && props.end)) {
         invalidState = true;
-        setError((prev) => true);
+        setError((prev) => true); // setting up the error
         return prev;
       }
       return props.selectedOption;
     });
     if (!invalidState) props.updateGrid(event);
   }
+
   return (
     <>
-      {error && (<ErrorModal onConfirm={onConfirm} title="Error" message="You can choose only one cell as Start or End" />)}
-      <div className={`cell ${(props.path.has(props.rowId+"-"+props.cellId))?'Y':cell}`} onClick={updateGrid} id={`${props.rowId}-${props.cellId}`}>
+      {error && (<ErrorModal onConfirm={onConfirm} title="Error" message="You can choose only one cell as Start or End" />)} // pops Error msg when state is inavalid
+      <div className={`cell ${(props.path.has(props.rowId+"-"+props.cellId))?'Y':cell}`} onClick={updateCell} id={`${props.rowId}-${props.cellId}`}>
         <p>{`${props.rowId}-${props.cellId}`}</p>
       </div>
     </>
