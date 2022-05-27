@@ -5,17 +5,11 @@ import Gridlayout from "./components/Grid";
 import Home from "./components/Home";
 
 function App() {
-  const [gridState, setGridState] = useState({
-    gridActive: false,
-    value: null,
-  });
+  const [gridState, setGridState] = useState({ gridActive: false, value: null });
 
   function gridSizeHandler(val) {
     setGridState((prev) => {
-      return {
-        gridActive: true,
-        value: val,
-      };
+      return { gridActive: true, value: val };
     });
   }
 
