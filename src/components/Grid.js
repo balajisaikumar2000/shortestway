@@ -39,7 +39,7 @@ function Grid(props) {
         setError((prev) => true)
         return;
       }
-      setPath((prev)=>getPath([...grid.current],[start.rowId,start.colId],[end.rowId,end.colId]));
+      setPath((prev)=>getPath(JSON.parse(JSON.stringify(grid.current)),[start.rowId,start.colId],[end.rowId,end.colId]));
     }else{
       setPath((prev)=> new Set());
     }
