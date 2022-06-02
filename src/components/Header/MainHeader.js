@@ -1,40 +1,29 @@
 import React from "react";
 import "./MainHeader.css";
 import Button from "../UI/Button";
+import Options from './Options'
 
 function MainHeader(props) {
+  const cellFillOptions = [ 
+    {id:'Start', value: 'S'}, 
+    {id:'End' , value:'E'}, 
+    {id:'Wall' , value:'W'},
+    {id:'Clear' , value:''}
+  ];
   function onChange(event) {
-    props.onChange(event);
+    props.selectedOption.current = event.target.value;
+    console.log(props.selectedOption)
   }
-
   function searchPath() {
     props.setPathFind(true);
   }
+  
   return (
     <header>
-      <div>
-        <span className="radio-toolbar">
-          <span className="radio-option">
-            <input type="radio" id="Start" name="cellFillOption" value="S" onChange={onChange} />
-            <label htmlFor="Start">Start</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="End" name="cellFillOption" value="E" onChange={onChange}/>
-            <label htmlFor="End">End</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="Wall" name="cellFillOption" value="W" onChange={onChange}/>
-            <label htmlFor="Wall">Wall</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="Clear" name="cellFillOption" value="C" onChange={onChange}/>
-            <label htmlFor="Clear">Clear</label>
-          </span>
-        </span>
+        <Options name='cellFillOptions' options={cellFillOptions} onChange={onChange} />
         <span>
           <Button onClick={searchPath}>Search Path</Button>
         </span>
-      </div>
     </header>
   );
 }
