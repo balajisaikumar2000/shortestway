@@ -1,7 +1,7 @@
 import React, { useState, useRef , useEffect } from "react";
 import MainHeader from "./Header/MainHeader";
 import ErrorModal from "./UI/Backdrop";
-import getPath from "./BFS";
+import getPath from "./BFS"
 import "./Grid.css";
 
 function Gridlayout(props) {
