@@ -9,12 +9,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
+  background-color: black;
 }
 
 #rows_parent {
   flex-direction: column;
-  /* width: 90vw; */
+  width: 90vw;
 }
 
 .row {
@@ -45,14 +46,14 @@
   background-color: cyan;
 }
 
-/* .cell p {
+.cell p {
   pointer-events: none;
   font-size: 10px;
   color: white;
   background-color: transparent;
 
   transition: color 0.4s ease-in-out;
-} */
+}
 
 .cell:hover p {
   color: black;
@@ -63,13 +64,13 @@
 }
 
 .S {
-  background-color: lightgreen;
+  background-color: rgb(9, 224, 9);
 }
 
 .E {
-  background-color: lightcoral;
+  background-color: rgb(225, 14, 14);
 }
 
-.Y{
+.Y {
   background-color: yellow;
 }
