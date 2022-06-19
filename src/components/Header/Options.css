@@ -1,0 +1,56 @@
+.radio-toolbar {
+  margin: 10px;
+}
+
+.radio-option {
+  margin: 0px 2px;
+}
+
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+  color: cyan;
+  border: 4px solid rgba(0, 255, 255, 1);
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 22px;
+  font-family: fantasy;
+  letter-spacing: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  filter: drop-shadow(0 0 15px cyan) drop-shadow(0 0 50px cyan) contrast(1)
+    brightness(1.1);
+  transition: 0.5s;
+  margin-right: 5px;
+  background-color: black;
+}
+
+.radio-toolbar label:hover {
+  color: black;
+  background-color: cyan;
+  filter: drop-shadow(0 0 20px cyan) contrast(2) brightness(2);
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color: cyan;
+  border-color: cyan;
+  color: black;
+}
+
+@media screen and (max-width: 723px) {
+  .radio-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 2px;
+    margin-left: 5px;
+  }
+  .radio-toolbar label {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}

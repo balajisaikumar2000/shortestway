@@ -8,7 +8,9 @@ const findPath = function (grid, start, end) {
     let distance = 0;
     let q = [start]
     while (q.length) {
-        for (const [r, c] of [...q]) {
+        const level = [...q];
+        q = [];
+        for (const [r, c] of level) {
             if (r === end[0] && c === end[1]) {
                 return distance;
             }
@@ -25,7 +27,11 @@ const findPath = function (grid, start, end) {
 };
 
 function getPath(grid, start, end) {
-    findPath(grid, start, end);
+    const distance = findPath(grid, start, end);
+    console.log(distance);
+    if (distance === -1){
+        return false;
+    }
     let [r, c] = end;
     const R = grid.length;
     const C = grid[0].length;

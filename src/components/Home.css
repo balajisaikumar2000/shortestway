@@ -1,52 +1,109 @@
-.home {
-  display: flex;
-  width: 200px;
-  height: 300px;
-  background-color: #bee3db;
-  display: flex;
-  width: 50%;
-  margin: auto;
-  margin-top: 10%;
-  border-radius: 5px;
-  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;1,300&family=Roboto:wght@100;300;400;500;700&family=Ubuntu:wght@300&display=swap");
+* {
+  font-family: "Ubuntu", sans-serif;
+  background-color: black;
 }
-form {
-  margin: 20px;
-  width: 80%;
+.title {
+  color: white;
+  background-color: rgb(9, 121, 110, 1);
+  width: 100%;
+  margin-top: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 20%;
+}
+.title h1 {
+  background-color: inherit;
+  margin-left: 4px;
+  font-size: xx-large;
+}
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
-form h2 {
-  margin-left: 35%;
+.home {
+  display: flex;
+  height: 100%;
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  /* border: 5px solid rgba(0, 255, 255, 0.329); */
+  box-shadow: -1px -1px 19px 1px cyan;
+  margin-top: 6%;
 }
-.gridSelector {
-  color: black;
+form {
+  height: 100%;
+  margin: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .gridBox {
-  border: 1px solid black;
-  border-radius: 4px;
+  border: 2px solid rgb(9, 121, 110, 1);
+  border-radius: 3rem;
+  color: white;
+  font-family: roboto;
+  font-weight: 100;
+  overflow: hidden;
+  padding: 5px 10px;
+  position: relative;
+  text-decoration: none;
+  transition: 0.4s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.gridBox::after {
+  background-color: rgb(9, 121, 110, 1);
+  border-radius: 3rem;
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.4s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.gridBox:hover::after {
+  transform: translate(0, 0);
+}
+
+.gridBox input[type="radio"]:checked {
+  background: rgb(9, 121, 110, 1);
+}
+
+.gridBox:hover {
+  /* transform: scale(1.1); */
   background: rgb(9, 121, 110, 1);
   color: white;
-
-  padding: 3px;
 }
+.gridBox label {
+  background-color: inherit;
+}
+
 .inputGrid {
   display: flex;
-  justify-content: space-around;
-  margin-left: 5%;
+  width: 75%;
+  justify-content: space-between;
+  /* margin-left: 5%; */
+  font-size: large;
 }
 .submitButton {
-  /* margin-left: 40%;
-  width: 20%;
-
-  margin-top: 7px;
-  border: 3px black;
-  border-radius: 5px;
-  padding: 2px; */
-
-  font-size: 18px;
-  padding: 15px;
+  font-size: larger;
+  padding: 5%;
   border: 1px solid black;
   border-radius: 4px;
   color: black;
@@ -61,4 +118,68 @@ form h2 {
   background: rgb(9, 121, 110, 1);
   /* background: rgb(0, 212, 255, 1); */
   color: white;
+}
+.gridSelector {
+  display: none;
+}
+h2 {
+  color: white;
+}
+@media screen and (max-width: 700px) {
+  .container {
+    margin-top: 55%;
+  }
+  .home {
+    width: 75%;
+  }
+  form {
+    width: 100%;
+  }
+  h2 {
+    font-size: large;
+    margin: 2 7%;
+    margin-left: 7%;
+  }
+  .inputGrid {
+    font-size: small;
+    align-items: center;
+    /* justify-content: space-between; */
+    flex-direction: column;
+  }
+  .gridBox {
+    margin-top: 2%;
+    width: max-content;
+  }
+  .submitButton {
+    font-size: medium;
+    font-weight: bold;
+  }
+  .title {
+    height: 13%;
+  }
+  .title h1 {
+    margin-top: 5px;
+    font-size: 140%;
+  }
+}
+
+.submitButton {
+  color: white;
+  border: 2px solid rgba(0, 255, 255, 1);
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 22px;
+  letter-spacing: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: -1px -1px 19px 1px cyan;
+  /* filter: drop-shadow(0 0 10px cyan) drop-shadow(0 0 20px cyan) contrast(1) */
+  /* brightness(1); */
+  transition: 0.5s;
+  background-color: black;
+}
+
+.submitButton:hover {
+  color: black;
+  background-color: cyan;
 }
