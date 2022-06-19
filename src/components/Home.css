@@ -11,7 +11,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 20%;
+  height: 15%;
 }
 .title h1 {
   background-color: inherit;
@@ -33,7 +33,7 @@
   border-radius: 5px;
   /* border: 5px solid rgba(0, 255, 255, 0.329); */
   box-shadow: -1px -1px 19px 1px cyan;
-  margin-top: 6%;
+  margin-top: 10%;
 }
 form {
   height: 100%;
