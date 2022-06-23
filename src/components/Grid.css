@@ -1,7 +1,6 @@
 * {
   padding: none;
   margin: none;
-  /* background-color: black; */
 }
 
 #main-grid {
@@ -9,7 +8,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
+  background-color: black;
 }
 
 #rows_parent {
@@ -35,6 +35,8 @@
   transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1),
     border 0.2s ease-in-out,
     background-color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  height: 30px;
+  width: 30px;
 }
 
 .cell:hover {

@@ -1,40 +1,36 @@
 import React from "react";
 import "./MainHeader.css";
 import Button from "../UI/Button";
+import Options from '../UI/Options'
 
 function MainHeader(props) {
+  const cellFillOptions = [ 
+    {id:'Start', value: 'S'}, 
+    {id:'End' , value:'E'}, 
+    {id:'Wall' , value:'W'},
+    {id:'Clear' , value:''}
+  ];
   function onChange(event) {
-    props.onChange(event);
+    props.selectedOption.current = event.target.value;
   }
-
   function searchPath() {
     props.setPathFind(true);
   }
+
+  function goToHome() {
+    props.goToHome();
+  }
+
+  function resetGrid() {
+    props.resetGrid();
+  }
+  
   return (
     <header>
-      <div>
-        <span className="radio-toolbar">
-          <span className="radio-option">
-            <input type="radio" id="Start" name="cellFillOption" value="S" onChange={onChange} />
-            <label htmlFor="Start">Start</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="End" name="cellFillOption" value="E" onChange={onChange}/>
-            <label htmlFor="End">End</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="Wall" name="cellFillOption" value="W" onChange={onChange}/>
-            <label htmlFor="Wall">Wall</label>
-          </span>
-          <span className="radio-option">
-            <input type="radio" id="Clear" name="cellFillOption" value="C" onChange={onChange}/>
-            <label htmlFor="Clear">Clear</label>
-          </span>
-        </span>
-        <span>
-          <Button onClick={searchPath}>Search Path</Button>
-        </span>
-      </div>
+        <Options name='cellFillOptions' options={cellFillOptions} onChange={onChange} />
+        <Button onClick={searchPath}>Search Path</Button>
+        <Button onClick={goToHome}>Home</Button>
+        <Button onClick={resetGrid}>Reset</Button>
     </header>
   );
 }
