@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainHeader.css";
 import Button from "../UI/Button";
-import Options from './Options'
+import Options from '../UI/Options'
 
 function MainHeader(props) {
   const cellFillOptions = [ 
@@ -12,18 +12,25 @@ function MainHeader(props) {
   ];
   function onChange(event) {
     props.selectedOption.current = event.target.value;
-    console.log(props.selectedOption)
   }
   function searchPath() {
     props.setPathFind(true);
+  }
+
+  function goToHome() {
+    props.goToHome();
+  }
+
+  function resetGrid() {
+    props.resetGrid();
   }
   
   return (
     <header>
         <Options name='cellFillOptions' options={cellFillOptions} onChange={onChange} />
-        <span>
-          <Button onClick={searchPath}>Search Path</Button>
-        </span>
+        <Button onClick={searchPath}>Search Path</Button>
+        <Button onClick={goToHome}>Home</Button>
+        <Button onClick={resetGrid}>Reset</Button>
     </header>
   );
 }

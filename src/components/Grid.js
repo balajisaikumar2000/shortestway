@@ -13,8 +13,8 @@ function Gridlayout(props) {
   }
   return (
     <div id="main-grid">
-      <MainHeader setPathFind={setPathFind} selectedOption={selectedOption} />
-      <Grid /*className={selectedOption}*/ gridSize={props.gridSize} selectedOption={selectedOption} find={find} setPathFind={setPathFind}></Grid>
+      <MainHeader setPathFind={setPathFind} selectedOption={selectedOption} goToHome={props.goToHome} resetGrid={props.resetGrid} />
+      <Grid gridSize={props.gridSize} selectedOption={selectedOption} find={find} setPathFind={setPathFind}></Grid>
     </div>
   );
 }
@@ -133,8 +133,8 @@ function Grid(props) {
 }
 
 function Cell(props) {
-  const [cell, setCellState] = useState(() => " ");
-  const [error, setError] = useState(() => false);
+  const [cell, setCellState] = useState(" ");
+  const [error, setError] = useState(false);
 
   // Error confirm
   function onConfirm() {

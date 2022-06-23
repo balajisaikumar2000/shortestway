@@ -28,7 +28,6 @@ const findPath = function (grid, start, end) {
 
 function getPath(grid, start, end) {
     const distance = findPath(grid, start, end);
-    console.log(distance);
     if (distance === -1){
         return false;
     }
@@ -47,7 +46,6 @@ function getPath(grid, start, end) {
         }
     }
     path.delete(r+"-"+c);
-    console.log(path);
     return path
 }
 

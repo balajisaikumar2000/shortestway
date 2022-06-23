@@ -12,9 +12,9 @@ function Options(props) {
   }
 
   return (
-    <div className="radio-toolbar">
+    <span className="radio-toolbar">
       {props.options.map(createOption)}
-    </div>
+    </span>
   );
 }
 
