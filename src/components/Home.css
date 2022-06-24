@@ -81,7 +81,7 @@ form {
   transform: translate(0, 0);
 }
 
-.gridBox input[type="radio"]:checked {
+.gridBox input[type="radio"]:checked + label{
   background: rgb(9, 121, 110, 1);
 }
 
