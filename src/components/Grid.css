@@ -15,7 +15,7 @@
 
 #rows_parent {
   flex-direction: column;
-  width: 90vw;
+  width: auto;
 }
 
 .row {
