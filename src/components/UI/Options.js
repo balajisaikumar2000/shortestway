@@ -1,9 +1,10 @@
 import React from "react";
+import './Options.css'
 
 function Options(props) {
   function createOption(item, index) {
     return (
-      <span key={index} className={classes["radio-option"]}>
+      <span key={index} className="radio-option">
         <input type="radio" id={item.id} name={props.name} value={item.value} onChange={props.onChange}/>
         <label htmlFor={item.id}>{item.id}</label>
       </span>
@@ -11,9 +12,9 @@ function Options(props) {
   }
 
   return (
-    <div className={classes["radio-toolbar"]}>
+    <span className="radio-toolbar">
       {props.options.map(createOption)}
-    </div>
+    </span>
   );
 }
 
