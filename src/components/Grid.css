@@ -1,6 +1,7 @@
 * {
   padding: none;
   margin: none;
+  /* background-color: black; */
 }
 
 #main-grid {
@@ -63,13 +64,13 @@
 }
 
 .S {
-  background-color: lightgreen;
+  background-color: rgb(9, 224, 9);
 }
 
 .E {
-  background-color: lightcoral;
+  background-color: rgb(225, 14, 14);
 }
 
-.Y{
+.Y {
   background-color: yellow;
 }
