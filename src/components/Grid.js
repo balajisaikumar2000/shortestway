@@ -42,7 +42,7 @@ function Grid(props) {
     }else{
       setPath(new Set());
     }
-  },[props.find]);
+  },[end.colId,end.rowId,props.find,start.colId,start.isExist,start.rowId,end.isExist]);
 
   // Error Confirm
   function onConfirm(){
